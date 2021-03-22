@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" href="./style.css" />
+		<title>MedicalAnimations_STL</title>
+	</head>
+	<body>
+		<div class="scene">
+			
+		</div>
+		<form name="uploadForm" class="container">
+			<input id="uploadInput" type="file" name="myFiles" multiple>
+		</form>
+		<script>
+			function updateSize() {
+				let nBytes = 0,
+						oFiles = this.files,
+						nFiles = oFiles.length;
+				for (let nFileId = 0; nFileId < nFiles; nFileId++) {
+					nBytes += oFiles[nFileId].size;
+				}
+				let sOutput = nBytes + " bytes";
+				// optional code for multiples approximation
+				const aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
+				for (nMultiple = 0, nApprox = nBytes / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+					sOutput = nApprox.toFixed(3) + " " + aMultiples[nMultiple] + " (" + nBytes + " bytes)";
+				}
+				// end of optional code
+				document.getElementById("fileNum").innerHTML = nFiles;
+				document.getElementById("fileSize").innerHTML = sOutput;
+			}
+
+			// document.getElementById("uploadInput").addEventListener("change", updateSize, false);
+		</script>
+		<script src="node_modules/jquery/dist/jquery.min.js"></script>
+		<script type="module" src="app.js"></script>
+	</body>
+</html>
